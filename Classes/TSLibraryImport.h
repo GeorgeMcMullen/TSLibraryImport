@@ -22,6 +22,15 @@
 //THE SOFTWARE.
 //
 
+#import <AVFoundation/AVAssetReader.h>
+#import <AVFoundation/AVAssetReaderOutput.h>
+
+#ifdef DEBUG
+#   define TSLILog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define TSLILog(...)
+#endif
+
 #define TSLibraryImportErrorDomain @"TSLibraryImportErrorDomain"
 
 #define TSUnknownError @"TSUnknownError"
@@ -31,16 +40,20 @@
 #define kTSFileExistsError -48 //dupFNErr
 
 typedef NSInteger AVAssetExportSessionStatus;
+typedef NSInteger AVAssetReaderStatus;
 
 @class AVAssetExportSession;
 
 @interface TSLibraryImport : NSObject {
 	AVAssetExportSession* exportSession;
 	NSError* movieFileErr;
+
+	AVAssetReader *myAssetReader;
+	AVAssetReaderTrackOutput *myOutput;
 }
 
 /**
- * Pass in the NSURL* you get from an MPMediaItem's 
+ * Pass in the NSURL* you get from an MPMediaItem's
  * MPMediaItemPropertyAssetURL property to get the file's extension.
  *
  * Helpful in constructing the destination url for the
@@ -52,14 +65,18 @@ typedef NSInteger AVAssetExportSessionStatus;
  * @param: assetURL The NSURL* returned by MPMediaItemPropertyAssetURL property of MPMediaItem.
  * @param: destURL The file URL to write the imported file to. You'll get an exception if a file
  * exists at this location.
- * @param completionBlock This block is called when the import completes. Note that 
+ * @param completionBlock This block is called when the import completes. Note that
  * completion doesn't imply success. Be sure to check the status and error properties
  * of the TSLibraryImport* instance from your completionBlock.
  */
 - (void)importAsset:(NSURL*)assetURL toURL:(NSURL*)destURL completionBlock:(void (^)(TSLibraryImport* import))completionBlock;
+- (void)importAVAssetReader:(NSURL*)assetURL toURL:(NSURL*)destURL completionBlock:(void (^)(TSLibraryImport* import))completionBlock;
+- (void)importAVAssetReaderNew:(NSURL*)assetURL toURL:(NSURL*)destURL completionBlock:(void (^)(TSLibraryImport* import))completionBlock;
+- (void)importAVAssetReaderWriter:(NSURL*)assetURL toURL:(NSURL*)destURL completionBlock:(void (^)(TSLibraryImport* import))completionBlock;
 
 @property (readonly) NSError* error;
 @property (readonly) AVAssetExportSessionStatus status;
+@property (readonly) AVAssetReaderStatus avStatus;
 @property (readonly) float progress;
 
 @end

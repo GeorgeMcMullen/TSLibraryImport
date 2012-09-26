@@ -80,7 +80,7 @@
 	startTime = [NSDate timeIntervalSinceReferenceDate];
 	NSTimer* timer = [NSTimer timerWithTimeInterval:0.1 target:self selector:@selector(progressTimer:) userInfo:import repeats:YES];
 	[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-	[import importAsset:assetURL toURL:outURL completionBlock:^(TSLibraryImport* import) {
+	[import importAVAssetReader:assetURL toURL:outURL completionBlock:^(TSLibraryImport* import) {
 		/*
 		 * If the export was successful (check the status and error properties of 
 		 * the TSLibraryImport instance) you know have a local copy of the file
@@ -89,9 +89,9 @@
 		 *
 		 * Here we're just playing it with AVPlayer
 		 */
-		if (import.status != AVAssetExportSessionStatusCompleted) {
+		if ((import.status != AVAssetExportSessionStatusCompleted) && ([import avStatus] != AVAssetReaderStatusCompleted)) {
 			// something went wrong with the import
-			NSLog(@"Error importing: %@", import.error);
+			NSLog(@"Error importing: %@", import.error); // import.avError
 			[import release];
 			import = nil;
 			return;
@@ -114,7 +114,7 @@
   didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
 	[self dismissModalViewControllerAnimated:YES];
 	for (MPMediaItem* item in mediaItemCollection.items) {
-		NSString* title = [item valueForProperty:MPMediaItemPropertyTitle];
+		NSString* title = [NSString stringWithFormat:@"%@ - %@ - %@ - %@",[item valueForProperty:MPMediaItemPropertyArtist],[item valueForProperty:MPMediaItemPropertyAlbumTitle],[item valueForProperty:MPMediaItemPropertyAlbumTrackNumber], [item valueForProperty:MPMediaItemPropertyTitle]];
 		NSURL* assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
 		if (nil == assetURL) {
 			/**
