@@ -58,7 +58,6 @@
 		case AVAssetExportSessionStatusCancelled:
 		case AVAssetExportSessionStatusCompleted:
 		case AVAssetExportSessionStatusFailed:
-            [export release];
 			[timer invalidate];
 			break;
 		default:
