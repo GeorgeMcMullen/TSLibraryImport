@@ -46,8 +46,7 @@ typedef NSInteger AVAssetReaderStatus;
 
 @interface TSLibraryImport : NSObject {
 	AVAssetExportSession* exportSession;
-	NSError* movieFileErr;
-
+    
 	AVAssetReader *myAssetReader;
 	AVAssetReaderTrackOutput *myOutput;
 }
@@ -70,9 +69,6 @@ typedef NSInteger AVAssetReaderStatus;
  * of the TSLibraryImport* instance from your completionBlock.
  */
 - (void)importAsset:(NSURL*)assetURL toURL:(NSURL*)destURL completionBlock:(void (^)(TSLibraryImport* import))completionBlock;
-- (void)importAVAssetReader:(NSURL*)assetURL toURL:(NSURL*)destURL completionBlock:(void (^)(TSLibraryImport* import))completionBlock;
-- (void)importAVAssetReaderNew:(NSURL*)assetURL toURL:(NSURL*)destURL completionBlock:(void (^)(TSLibraryImport* import))completionBlock;
-- (void)importAVAssetReaderWriter:(NSURL*)assetURL toURL:(NSURL*)destURL completionBlock:(void (^)(TSLibraryImport* import))completionBlock;
 
 @property (readonly) NSError* error;
 @property (readonly) AVAssetExportSessionStatus status;

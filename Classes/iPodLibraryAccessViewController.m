@@ -58,6 +58,7 @@
 		case AVAssetExportSessionStatusCancelled:
 		case AVAssetExportSessionStatusCompleted:
 		case AVAssetExportSessionStatusFailed:
+            [export release];
 			[timer invalidate];
 			break;
 		default:
@@ -76,11 +77,11 @@
 	[[NSFileManager defaultManager] removeItemAtURL:outURL error:nil];
 	
 	// create the import object
-	TSLibraryImport* import = [[TSLibraryImport alloc] init];
+	TSLibraryImport* import = [[TSLibraryImport alloc] init]; // Watch out for leaks here
 	startTime = [NSDate timeIntervalSinceReferenceDate];
 	NSTimer* timer = [NSTimer timerWithTimeInterval:0.1 target:self selector:@selector(progressTimer:) userInfo:import repeats:YES];
 	[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-	[import importAVAssetReader:assetURL toURL:outURL completionBlock:^(TSLibraryImport* import) {
+	[import importAsset:assetURL toURL:outURL completionBlock:^(TSLibraryImport* import) {
 		/*
 		 * If the export was successful (check the status and error properties of 
 		 * the TSLibraryImport instance) you know have a local copy of the file
@@ -101,7 +102,7 @@
 		[import release];
 		import = nil;
 		if (!player) {
-			player = [[AVPlayer alloc] initWithURL:outURL];			
+			player = [[AVPlayer alloc] initWithURL:outURL];	// Watch out for leaks here
 		} else {
 			[player pause];
 			[player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:outURL]];
@@ -110,7 +111,7 @@
 	}];
 }
 
-- (void)mediaPicker:(MPMediaPickerController *)mediaPicker 
+- (void)mediaPicker:(MPMediaPickerController *)mediaPicker
   didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
 	[self dismissModalViewControllerAnimated:YES];
 	for (MPMediaItem* item in mediaItemCollection.items) {
@@ -147,7 +148,7 @@
 	/*
 	 * ???: Can we filter the media picker so we don't see m4p files?
 	 */
-	MPMediaPickerController* mediaPicker = [[[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic] autorelease];
+	MPMediaPickerController* mediaPicker = [[[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic] autorelease]; // For some reason, this seems to be leaky
 	mediaPicker.delegate = self;
 	[self presentModalViewController:mediaPicker animated:YES];
 }

@@ -15,6 +15,7 @@
 		2899E5220DE3E06400AC0155 /* iPodLibraryAccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* iPodLibraryAccessViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* iPodLibraryAccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* iPodLibraryAccessViewController.m */; };
+		5E2E7BF61612FA5300140B6B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2E7BF51612FA5300140B6B /* AudioToolbox.framework */; };
 		C835DA3B11E8A6BD00702320 /* GHUnitIPhoneTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = C835DA2D11E8A68D00702320 /* GHUnitIPhoneTestMain.m */; };
 		C835DA3C11E8A6C300702320 /* TSLibraryImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C8AA498C11E7DA5C00CD2D6D /* TSLibraryImport.m */; };
 		C835DA4011E8A6E600702320 /* libGHUnitIPhone4_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C835DA3F11E8A6E600702320 /* libGHUnitIPhone4_0.a */; };
@@ -43,6 +44,7 @@
 		28D7ACF70DDB3853001CB0EB /* iPodLibraryAccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPodLibraryAccessViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iPodLibraryAccess_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPodLibraryAccess_Prefix.pch; sourceTree = "<group>"; };
+		5E2E7BF51612FA5300140B6B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* iPodLibraryAccess-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iPodLibraryAccess-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C835DA2011E8A68D00702320 /* GHAsyncTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAsyncTestCase.h; path = "../../../iPhone/libGHUnitIPhone4_0-0/GHAsyncTestCase.h"; sourceTree = SOURCE_ROOT; };
 		C835DA2111E8A68D00702320 /* GHTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTest.h; path = "../../../iPhone/libGHUnitIPhone4_0-0/GHTest.h"; sourceTree = SOURCE_ROOT; };
@@ -70,7 +72,6 @@
 		C8AA498B11E7DA5C00CD2D6D /* TSLibraryImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLibraryImport.h; sourceTree = "<group>"; };
 		C8AA498C11E7DA5C00CD2D6D /* TSLibraryImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLibraryImport.m; sourceTree = "<group>"; };
 		C8E0E92711CC18ED00B51EB5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		C8E956B611EBAD5500398384 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E2E7BF61612FA5300140B6B /* AudioToolbox.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -127,7 +129,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				C8E956B611EBAD5500398384 /* LICENSE.md */,
 				C8AA47BF11E6708800CD2D6D /* README.md */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -161,6 +162,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E2E7BF51612FA5300140B6B /* AudioToolbox.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
