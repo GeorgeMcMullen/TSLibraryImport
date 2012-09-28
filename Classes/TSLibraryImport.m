@@ -241,21 +241,21 @@
 		TSLILog(@"track.mediaType: %@", track.mediaType);
 		TSLILog(@"track.formatDescriptions count: %d",[track.formatDescriptions count]);
 		CMFormatDescriptionRef fmt = (CMFormatDescriptionRef)[track.formatDescriptions objectAtIndex:0];
-		AudioStreamBasicDescription *desc = CMAudioFormatDescriptionGetStreamBasicDescription(fmt);
+		const AudioStreamBasicDescription *desc = CMAudioFormatDescriptionGetStreamBasicDescription(fmt);
 
-		AudioChannelLayout *channelLayout;
+		const AudioChannelLayout *channelLayout;
 		size_t sizeOfLayout = sizeof(channelLayout);
 
 		channelLayout=CMAudioFormatDescriptionGetChannelLayout(fmt, &sizeOfLayout);
 
 		TSLILog(@"mSampleRate: %0.2f",desc->mSampleRate);
-		TSLILog(@"mFormatID: %d",desc->mFormatID);
-		TSLILog(@"mFormatFlags: %d",desc->mFormatFlags);
-		TSLILog(@"mBytesPerPacket: %d",desc->mBytesPerPacket);
-		TSLILog(@"mFramesPerPacket: %d",desc->mFramesPerPacket);
-		TSLILog(@"mBytesPerFrame: %d",desc->mBytesPerFrame);
-		TSLILog(@"mChannelsPerFrame: %d",desc->mChannelsPerFrame);
-		TSLILog(@"mBitsPerChannel: %d",desc->mBitsPerChannel);
+		TSLILog(@"mFormatID: %ld",desc->mFormatID);
+		TSLILog(@"mFormatFlags: %ld",desc->mFormatFlags);
+		TSLILog(@"mBytesPerPacket: %ld",desc->mBytesPerPacket);
+		TSLILog(@"mFramesPerPacket: %ld",desc->mFramesPerPacket);
+		TSLILog(@"mBytesPerFrame: %ld",desc->mBytesPerFrame);
+		TSLILog(@"mChannelsPerFrame: %ld",desc->mChannelsPerFrame);
+		TSLILog(@"mBitsPerChannel: %ld",desc->mBitsPerChannel);
 
 		TSLILog(@"track.enabled: %d", track.enabled);
 		TSLILog(@"track.selfContained: %d", track.selfContained);
