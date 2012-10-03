@@ -121,10 +121,10 @@
 
                     UInt32 myFlags = 0;
 
-                    [[NSFileManager defaultManager] createFileAtPath:[destURL path] contents:nil attributes:nil];
-                    NSFileHandle *outputFileHandle = [NSFileHandle fileHandleForWritingAtPath:[destURL path]];
-                    [outputFileHandle seekToEndOfFile];
-                    //FILE* outputFileHandle = fopen([[destURL path] cStringUsingEncoding:NSUTF8StringEncoding], "w");
+                    //[[NSFileManager defaultManager] createFileAtPath:[destURL path] contents:nil attributes:nil];
+                    //NSFileHandle *outputFileHandle = [NSFileHandle fileHandleForWritingAtPath:[destURL path]];
+                    //[outputFileHandle seekToEndOfFile];
+                    FILE* outputFileHandle = fopen([[destURL path] cStringUsingEncoding:NSUTF8StringEncoding], "w");
 
                     if (outputFileHandle == nil) // (outputFileHandle == NULL)
                     {
@@ -148,8 +148,9 @@
 
                             if (!err && blockBufferOut && buffList.mBuffers[0].mData && (buffList.mBuffers[0].mDataByteSize > 0))
                             {
-                                [outputFileHandle writeData:[NSData dataWithBytes:buffList.mBuffers[0].mData length:buffList.mBuffers[0].mDataByteSize]];
-                                //fwrite(buffList.mBuffers[0].mData, buffList.mBuffers[0].mDataByteSize, 1, outputFileHandle);
+                                // NSData dataWithBytes actually allocates memory as it's writing, which may cause a memory warning / crash if the app runs out of memory.
+                                //[outputFileHandle writeData:[NSData dataWithBytes:buffList.mBuffers[0].mData length:buffList.mBuffers[0].mDataByteSize]];
+                                fwrite(buffList.mBuffers[0].mData, buffList.mBuffers[0].mDataByteSize, 1, outputFileHandle);
                             }
 
                             myBuffCopiedNextSampleBuffer=YES;
@@ -170,8 +171,8 @@
                         
                     } while (myBuffCopiedNextSampleBuffer || [myAssetReader status] == AVAssetReaderStatusReading);
 
-                    [outputFileHandle closeFile];
-                    //fclose(outputFileHandle);
+                    //[outputFileHandle closeFile];
+                    fclose(outputFileHandle);
 
                     completionBlock(self);
                 }
